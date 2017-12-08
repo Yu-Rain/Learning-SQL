@@ -34,6 +34,30 @@ varchar(20)
 	2. SQL Server, char和varchar列都能容纳8000字节
 ```
 
+#### enum 字符数据类型
+> enum 是 MySQL 提供的字符数据类型, 可以将检查约束和数据类型定义融合在一起
+
+`gender enum('m', 'f')` 表示gender列只接受m或f这两个值, 如果存放其他值将会报错. (不区分大小写)
+
+
+```c
+mysql> insert into person (person_id, fname, gender) values (null, 'Tom', 'M'); // 输入的是M, 但是数据库表中存储的是m.
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from person
+    -> ;
++-----------+-------+-------+--------+------------+--------+------+-------+---------+
+| person_id | fname | lname | gender | birth_date | street | city | state | country |
++-----------+-------+-------+--------+------------+--------+------+-------+---------+
+|         1 | Tom   | NULL  | m      | NULL       | NULL   | NULL | NULL  | NULL    |
++-----------+-------+-------+--------+------------+--------+------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> 
+
+```
+
+
 
 ### 文本数据
 
@@ -157,7 +181,7 @@ create database foreign_sales character set utf8;
 
 ### 整数类型
 
-> 在类型前添加 `unsigned` 关键字, 代表无符号(>=0)
+> 在类型后添加 `unsigned` 关键字, 代表无符号(>=0)
 
 类型 | 带符号的范围 | 无符号的范围 | 字节
 ---- | --------- | ---------- | ---- |
