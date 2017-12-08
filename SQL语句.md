@@ -233,4 +233,53 @@ mysql>
 > 删除表中所有行:  `delete from 表名;`
 > 删除表中指定的行: `delete from 表名 where 列名=值;`
 
+### 3.4 查询数据 select 子句
+#### 1. 查询表中所有数据
+`select * from 表名;`
+#### 2. 查询表中指定的列的数据
+`select 列名1, 列名2, ... from 表名;`
+
+#### 3. select子句后可以使用哪些
+> 列名, 字符, 表达式, 內建函数调用
+
+```c
+mysql> select 
+    -> emp_id, // 列名
+    -> 'ACTIVE', // 根据需求写的字符
+    -> emp_id * 3.14159, // 表达式
+    -> UPPER(lname) // 调用转化字符串为大写的函数
+    -> from employee;
+```
+
+#### 4. 为查询返回的列起别名
+
+```c
+mysql> select
+    -> emp_id employee_id, 
+    -> 'ACTIVE' status,
+    -> emp_id * 3.14159,
+    -> UPPER(lname) last_name_upper
+    -> from employee;
+```
+
+##### 使用 as 关键字
+> 在别名前添加 `as` 关键字, 可以提高查询语句的可读性.
+> 结果集和不使用 `as` 没有区别. 
+
+```c
+mysql> select 
+    -> emp_id,
+    -> 'ACIVE' as status,
+    -> emp_id * 3.14159 as epm_x_pi,
+    -> UPPER(lname) as last_name_upper
+    -> from employee;
+```
+
+#### 5. 去除重复的行
+> `distinct` 关键字
+
+```
+mysql> select distinct cust_id from account;
+```
+
 
